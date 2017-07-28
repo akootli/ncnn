@@ -247,7 +247,7 @@ void mtcnn::detect(cv::Mat &image){
         if((*it).exist){
             Rect temp((*it).y1, (*it).x1, (*it).y2-(*it).y1, (*it).x2-(*it).x1);
             Mat tempIm;
-            tempIm.copyTo(image(temp));
+            image(temp).copyTo(tempIm);
             ncnn::Mat in = ncnn::Mat::from_pixels_resize(tempIm.data, ncnn::Mat::PIXEL_BGR, tempIm.cols, tempIm.rows, 24, 24);
             in.substract_mean_normalize(mean_vals, norm_vals);
             ncnn::Extractor ex = Rnet.create_extractor();
@@ -282,7 +282,7 @@ void mtcnn::detect(cv::Mat &image){
         if((*it).exist){
             Rect temp((*it).y1, (*it).x1, (*it).y2-(*it).y1, (*it).x2-(*it).x1);
             Mat tempIm;
-            tempIm.copyTo(image(temp));
+            image(temp).copyTo(tempIm);
             ncnn::Mat in = ncnn::Mat::from_pixels_resize(tempIm.data, ncnn::Mat::PIXEL_BGR, tempIm.cols, tempIm.rows, 48, 48);
             in.substract_mean_normalize(mean_vals, norm_vals);
             ncnn::Extractor ex = Onet.create_extractor();
